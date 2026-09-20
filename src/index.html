@@ -2,12 +2,158 @@
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>MP1</title>
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="description" content="Northstar is a fictional field journal about Arctic wildlife and conservation." />
+        <title>Northstar | Stories from the Arctic</title>
     </head>
     <body>
-        <h1>Hello World! Welcome to MP1!</h1>
-        <img src="assets/image.jpg">
+        <nav class="site-nav" aria-label="Primary navigation">
+            <div class="nav-inner">
+                <a class="brand" href="#home" aria-label="Northstar home"><span class="brand-mark" aria-hidden="true"></span><span>Northstar</span></a>
+                <div class="nav-links">
+                    <a class="nav-link is-active" href="#home">Home</a>
+                    <a class="nav-link" href="#mission">Mission</a>
+                    <a class="nav-link" href="#expeditions">Expeditions</a>
+                    <a class="nav-link" href="#stories">Field Stories</a>
+                    <a class="nav-link" href="#field-notes">Field notes</a>
+                    <a class="nav-link" href="#contact">Contact</a>
+                </div>
+            </div>
+        </nav>
+
+        <header class="hero page-section" id="home">
+            <div class="hero-overlay"></div>
+            <div class="section-inner hero-content">
+                <p class="eyebrow">Independent Arctic field journal</p>
+                <h1>Stay curious.<br />Tread lightly.</h1>
+                <p class="hero-copy">Stories from the edge of the map, where sea ice, wildlife, and people shape one another.</p>
+                <a class="button button-primary" href="#mission">Begin the journey <span class="icon icon-arrow" aria-hidden="true"></span></a>
+            </div>
+            <a class="scroll-cue" href="#mission" aria-label="Scroll to our mission"><span>Explore</span><span class="chevron" aria-hidden="true"></span></a>
+        </header>
+
+        <main>
+            <section class="stripe stripe-light page-section" id="mission">
+                <div class="section-inner">
+                    <p class="eyebrow">Why we go north</p>
+                    <h2>Observe more. Disturb less.</h2>
+                    <p class="section-lead">Northstar documents a changing Arctic through patient fieldwork, local knowledge, and stories that make distant places feel close.</p>
+                    <div class="principles-grid">
+                        <article class="principle-card reveal"><span class="feature-icon icon-eye" aria-hidden="true"></span><h3>Patient observation</h3><p>We slow down, watch carefully, and let wildlife set the pace.</p></article>
+                        <article class="principle-card reveal"><span class="feature-icon icon-compass" aria-hidden="true"></span><h3>Local direction</h3><p>Every route begins with the experience of northern communities.</p></article>
+                        <article class="principle-card reveal"><span class="feature-icon icon-snow" aria-hidden="true"></span><h3>Lighter footprints</h3><p>Small teams and low-impact practices protect the places we visit.</p></article>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stripe stripe-blue page-section" id="expeditions">
+                <div class="section-inner">
+                    <p class="eyebrow">Recent expeditions</p>
+                    <h2>Three windows into the north</h2>
+                    <div class="carousel" aria-roledescription="carousel" aria-label="Recent expeditions">
+                        <div class="carousel-viewport"><div class="carousel-track">
+                            <article class="slide slide-one" aria-label="1 of 3"><div class="slide-copy"><p class="slide-number">01 / Sea ice</p><h3>The breathing edge</h3><p>Following the shifting border where frozen ocean meets open water.</p></div></article>
+                            <article class="slide slide-two" aria-label="2 of 3"><div class="slide-copy"><p class="slide-number">02 / Tundra</p><h3>Summer underfoot</h3><p>A close look at the brief, brilliant season that transforms the tundra.</p></div></article>
+                            <article class="slide slide-three" aria-label="3 of 3"><div class="slide-copy"><p class="slide-number">03 / Night sky</p><h3>Signals in the dark</h3><p>Listening for migrating birds beneath an aurora-lit autumn sky.</p></div></article>
+                        </div></div>
+                        <button class="carousel-control carousel-prev" type="button" aria-label="Previous slide"><span class="control-chevron control-chevron-left" aria-hidden="true"></span></button>
+                        <button class="carousel-control carousel-next" type="button" aria-label="Next slide"><span class="control-chevron" aria-hidden="true"></span></button>
+                        <div class="carousel-dots" aria-label="Choose a slide">
+                            <button class="carousel-dot is-active" type="button" aria-label="Show slide 1" aria-current="true"></button>
+                            <button class="carousel-dot" type="button" aria-label="Show slide 2"></button>
+                            <button class="carousel-dot" type="button" aria-label="Show slide 3"></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="wild-callout page-section" id="stories">
+                <div class="wild-overlay"></div>
+                <div class="section-inner callout-content">
+                    <div class="story-intro">
+                        <p class="eyebrow">Field stories</p>
+                        <h2>Choose a story from the north</h2>
+                        <p>Select an image to open its extended field note.</p>
+                    </div>
+                    <div class="story-grid">
+                        <button class="story-card" type="button"
+                            data-story-title="The patience of a polar bear"
+                            data-story-kicker="Field story 01 · Sea ice"
+                            data-story-body="For nearly an hour, the bear barely moved. Then the wind shifted. Its nose lifted, one paw settled soundlessly ahead of the other, and the empty-looking ice became a map. Observing from a responsible distance lets moments like this unfold naturally."
+                            data-story-meta="Recorded near the Beaufort Sea · April 2026"
+                            data-story-image="assets/field-polar-bear.jpg"
+                            data-story-alt="A polar bear walking across fractured Arctic sea ice">
+                            <img src="assets/field-polar-bear.jpg" alt="A polar bear walking across fractured Arctic sea ice" />
+                            <span class="story-card-copy"><span>Sea ice</span><strong>The patient hunter</strong></span>
+                        </button>
+                        <button class="story-card" type="button"
+                            data-story-title="Autumn arrives all at once"
+                            data-story-kicker="Field story 02 · Tundra"
+                            data-story-body="The tundra shifts quickly from green to copper, and the Arctic fox shifts with it. Its coat, movement, and hunting patterns respond to a season measured in days rather than months. A quiet encounter reveals how closely each animal reads the landscape."
+                            data-story-meta="Recorded in northern Alaska · September 2026"
+                            data-story-image="assets/field-arctic-fox.jpg"
+                            data-story-alt="An Arctic fox standing among autumn tundra plants">
+                            <img src="assets/field-arctic-fox.jpg" alt="An Arctic fox standing among autumn tundra plants" />
+                            <span class="story-card-copy"><span>Tundra</span><strong>Between seasons</strong></span>
+                        </button>
+                        <button class="story-card" type="button"
+                            data-story-title="A green river in the night"
+                            data-story-kicker="Field story 03 · Night sky"
+                            data-story-body="After the instruments are checked and the camp grows quiet, the sky becomes the largest part of the landscape. The aurora begins as a pale line before folding into luminous arcs above the tents and mountains."
+                            data-story-meta="Recorded above the Arctic Circle · November 2026"
+                            data-story-image="assets/field-aurora-camp.jpg"
+                            data-story-alt="Green aurora above a remote Arctic field camp">
+                            <img src="assets/field-aurora-camp.jpg" alt="Green aurora above a remote Arctic field camp" />
+                            <span class="story-card-copy"><span>Night sky</span><strong>Signals overhead</strong></span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stripe stripe-mist page-section" id="field-notes">
+                <div class="section-inner video-layout">
+                    <div class="video-copy"><p class="eyebrow">Field notes</p><h2>Notice the small worlds</h2><p>Conservation starts with attention. Even a few quiet seconds can reveal the movement, rhythm, and resilience hidden in a landscape.</p><p class="video-caption">A short CC0 nature study, presented with the HTML5 video element.</p></div>
+                    <div class="video-frame reveal">
+                        <video controls preload="metadata" poster="assets/image.jpg">
+                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4" />
+                            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm" type="video/webm" />
+                            Your browser does not support HTML5 video.
+                        </video>
+                        <span class="video-label">Nature study · 00:30</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="stripe stripe-dark join-section">
+                <div class="section-inner join-content"><p class="eyebrow">Keep looking north</p><h2>One careful observation can change how we see a place.</h2><a class="button button-primary" href="mailto:hello@example.com">Share your field note</a></div>
+            </section>
+        </main>
+
+        <footer class="site-footer page-section" id="contact">
+            <div class="section-inner footer-inner">
+                <div><a class="brand footer-brand" href="#home"><span class="brand-mark" aria-hidden="true"></span><span>Northstar</span></a><p>An independent field journal made for curious minds.</p></div>
+                <div class="footer-contact"><p class="footer-label">Follow the trail</p><div class="social-links">
+                    <a href="https://github.com/" target="_blank" rel="noreferrer" aria-label="Northstar on GitHub"><span class="social-icon icon-github" aria-hidden="true"></span></a>
+                    <a href="https://www.linkedin.com/" target="_blank" rel="noreferrer" aria-label="Northstar on LinkedIn"><span class="social-icon icon-linkedin" aria-hidden="true"></span></a>
+                    <a href="https://www.instagram.com/" target="_blank" rel="noreferrer" aria-label="Northstar on Instagram"><span class="social-icon icon-instagram" aria-hidden="true"></span></a>
+                </div></div>
+                <p class="copyright">© 2026 Northstar Field Journal</p>
+            </div>
+        </footer>
+
+        <div class="modal" id="story-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+            <div class="modal-backdrop" data-close-modal></div>
+            <div class="modal-panel" role="document">
+                <button class="modal-close" type="button" aria-label="Close field note" data-close-modal>×</button>
+                <img class="modal-image" src="assets/field-polar-bear.jpg" alt="" />
+                <div class="modal-copy">
+                    <p class="eyebrow" id="modal-kicker">Field story</p>
+                    <h2 id="modal-title">Field story title</h2>
+                    <p id="modal-body">Additional field story content appears here.</p>
+                    <p class="modal-meta" id="modal-meta">Field story details</p>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

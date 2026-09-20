@@ -1,1 +1,723 @@
-/* Your SCSS here. */
+@use "sass:color";
+
+$ink: #10262e;
+$deep: #07191f;
+$ocean: #0d4d5a;
+$ice: #e8f3f2;
+$snow: #f7faf8;
+$accent: #ff6f4f;
+$muted: #587078;
+$max-width: 1180px;
+$nav-large: 92px;
+$nav-small: 64px;
+
+:root {
+    --nav-height: #{$nav-large};
+    --section-space: clamp(5rem, 8vw, 8.5rem);
+}
+
+@mixin centered-section {
+    width: min(#{$max-width}, calc(100% - 3rem));
+    margin-inline: auto;
+}
+
+@mixin button-reset {
+    border: 0;
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    background: none;
+    cursor: pointer;
+}
+
+@mixin focus-ring {
+    outline: 3px solid rgba($accent, 0.55);
+    outline-offset: 4px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: $nav-small;
+}
+
+body {
+    margin: 0;
+    color: $ink;
+    background: $snow;
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    line-height: 1.65;
+}
+
+body.modal-open { overflow: hidden; }
+a { color: inherit; }
+button:focus-visible, a:focus-visible { @include focus-ring; }
+h1, h2, h3, p { margin-top: 0; }
+h1, h2, h3, .brand { font-family: Georgia, "Times New Roman", serif; }
+
+h1 {
+    max-width: 850px;
+    margin-bottom: 1.4rem;
+    font-size: clamp(4rem, 9vw, 8.4rem);
+    font-weight: 400;
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+}
+
+h2 {
+    margin-bottom: 1.3rem;
+    font-size: clamp(2.5rem, 5vw, 4.7rem);
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: -0.04em;
+}
+
+h3 {
+    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.section-inner {
+    @include centered-section;
+    position: relative;
+    z-index: 1;
+}
+
+.stripe { width: 100%; padding-block: var(--section-space); }
+.stripe-light { background: $snow; }
+.stripe-blue { color: white; background: $ocean; }
+.stripe-mist { background: $ice; }
+.stripe-dark { color: white; background: $deep; }
+
+.eyebrow {
+    margin-bottom: 1rem;
+    color: $accent;
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+}
+
+.section-lead {
+    max-width: 720px;
+    margin: 0 auto 4rem;
+    color: $muted;
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+// Requirements 2 and 4: fixed navigation with compact scrolled state.
+.site-nav {
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    left: 0;
+    height: $nav-large;
+    color: white;
+    background: rgba($deep, 0.45);
+    backdrop-filter: blur(14px);
+    transition: height 280ms ease, background-color 280ms ease, box-shadow 280ms ease;
+
+    &.is-compact {
+        height: $nav-small;
+        background: rgba($deep, 0.96);
+        box-shadow: 0 8px 30px rgba($deep, 0.18);
+
+        .brand { font-size: 1.2rem; }
+        .brand-mark { width: 22px; height: 22px; }
+        .nav-link { font-size: 0.76rem; }
+    }
+}
+
+.nav-inner {
+    @include centered-section;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    color: inherit;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    text-decoration: none;
+    transition: font-size 280ms ease;
+}
+
+.brand-mark {
+    position: relative;
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    transition: width 280ms ease, height 280ms ease;
+
+    &::before, &::after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 3px;
+        height: 68%;
+        border-radius: 1rem;
+        background: $accent;
+        content: "";
+        transform-origin: 50% 0;
+    }
+
+    &::before { transform: translate(-50%, -4%) rotate(42deg); }
+    &::after { height: 30%; transform: translate(-50%, -95%) rotate(-138deg); }
+}
+
+.nav-links {
+    display: flex;
+    align-items: stretch;
+    align-self: stretch;
+    gap: clamp(0.35rem, 1.8vw, 1.5rem);
+}
+
+.nav-link {
+    position: relative;
+    display: grid;
+    place-items: center;
+    color: rgba(white, 0.72);
+    font-size: 0.88rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: color 180ms ease, font-size 280ms ease;
+
+    &::after {
+        position: absolute;
+        right: 50%;
+        bottom: 0;
+        left: 50%;
+        height: 3px;
+        background: $accent;
+        content: "";
+        transition: right 180ms ease, left 180ms ease;
+    }
+
+    &:hover, &.is-active { color: white; }
+    &.is-active::after { right: 0; left: 0; }
+}
+
+.hero {
+    position: relative;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+    overflow: hidden;
+    color: white;
+    background-image: linear-gradient(90deg, rgba($deep, 0.96) 0%, rgba($deep, 0.72) 44%, rgba($deep, 0.06) 78%), url("../assets/image.jpg");
+    background-position: center, 74% center;
+    background-size: cover;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba($deep, 0.42), transparent 50%);
+}
+
+.hero-content {
+    padding-top: $nav-large;
+    animation: hero-rise 900ms 100ms ease both;
+}
+
+.hero-copy {
+    max-width: 560px;
+    margin-bottom: 2rem;
+    color: rgba(white, 0.78);
+    font-size: clamp(1.05rem, 2vw, 1.3rem);
+}
+
+.button {
+    display: inline-flex;
+    min-height: 52px;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    padding: 0.85rem 1.35rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: 0.88rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+    cursor: pointer;
+
+    &:hover { transform: translateY(-3px); }
+}
+
+.button-primary {
+    color: $deep;
+    background: $accent;
+    &:hover { background: color.adjust($accent, $lightness: 8%); }
+}
+
+.button-light {
+    color: $deep;
+    background: white;
+    &:hover { color: white; background: $ocean; }
+}
+
+.icon-arrow {
+    width: 18px;
+    height: 12px;
+    border-top: 2px solid currentColor;
+    transform: translateY(5px);
+
+    &::after {
+        display: block;
+        width: 8px;
+        height: 8px;
+        border-top: 2px solid currentColor;
+        border-right: 2px solid currentColor;
+        content: "";
+        transform: translate(8px, -6px) rotate(45deg);
+    }
+}
+
+.scroll-cue {
+    position: absolute;
+    z-index: 2;
+    bottom: 2rem;
+    left: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    color: rgba(white, 0.76);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+}
+
+.chevron {
+    width: 11px;
+    height: 11px;
+    border-right: 2px solid $accent;
+    border-bottom: 2px solid $accent;
+    animation: bounce 1.6s infinite;
+    transform: rotate(45deg);
+}
+
+#mission { text-align: center; }
+
+// Requirement 7: three-column content.
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+    text-align: left;
+}
+
+.principle-card {
+    padding: clamp(1.6rem, 3vw, 2.6rem);
+    border: 1px solid rgba($ocean, 0.13);
+    border-radius: 1.2rem;
+    background: white;
+    box-shadow: 0 18px 55px rgba($deep, 0.06);
+    p { margin-bottom: 0; color: $muted; }
+}
+
+.feature-icon {
+    position: relative;
+    display: grid;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 1.5rem;
+    place-items: center;
+    border-radius: 50%;
+    color: $accent;
+    background: rgba($accent, 0.1);
+}
+
+.icon-eye::before {
+    width: 23px;
+    height: 14px;
+    border: 2px solid currentColor;
+    border-radius: 80% 20% 80% 20%;
+    content: "";
+    transform: rotate(45deg);
+}
+
+.icon-eye::after {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: currentColor;
+    content: "";
+}
+
+.icon-compass::before {
+    width: 22px;
+    height: 22px;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    content: "";
+}
+
+.icon-compass::after {
+    position: absolute;
+    width: 6px;
+    height: 16px;
+    background: currentColor;
+    clip-path: polygon(50% 0, 100% 100%, 50% 72%, 0 100%);
+    content: "";
+    transform: rotate(35deg);
+}
+
+.icon-snow::before { color: currentColor; content: "✣"; font-size: 1.8rem; line-height: 1; }
+
+#expeditions {
+    text-align: center;
+    .eyebrow { color: color.adjust($accent, $lightness: 10%); }
+}
+
+// Requirement 6: three-slide carousel with side arrows.
+.carousel { position: relative; max-width: 980px; margin: 3rem auto 0; }
+.carousel-viewport { overflow: hidden; border-radius: 1.2rem; box-shadow: 0 22px 70px rgba($deep, 0.28); }
+.carousel-track {
+    display: flex;
+    transition: transform 550ms cubic-bezier(0.65, 0, 0.35, 1);
+
+    &.is-slide-0 { transform: translateX(0); }
+    &.is-slide-1 { transform: translateX(-100%); }
+    &.is-slide-2 { transform: translateX(-200%); }
+}
+
+.slide {
+    position: relative;
+    display: flex;
+    min-width: 100%;
+    min-height: 470px;
+    align-items: flex-end;
+    padding: clamp(2rem, 6vw, 5rem);
+    overflow: hidden;
+    text-align: left;
+
+    &::before, &::after { position: absolute; content: ""; }
+    &::before { inset: 0; background: linear-gradient(15deg, rgba($deep, 0.9), transparent 65%); }
+}
+
+.slide-one {
+    background: linear-gradient(145deg, #b8dfe5, #32798a 52%, #0c3a48);
+    &::after { top: 18%; right: -8%; width: 72%; height: 52%; border-radius: 55% 0 0 55%; background: rgba(white, 0.62); box-shadow: -90px 80px 0 rgba(white, 0.16); transform: rotate(-7deg); }
+}
+
+.slide-two {
+    background: linear-gradient(145deg, #f5c77c, #8e7950 48%, #233d3a);
+    &::after { right: 9%; bottom: 0; width: 38%; height: 78%; border-radius: 50% 50% 0 0; background: repeating-linear-gradient(100deg, rgba(white, 0.12) 0 8px, transparent 8px 24px); transform: skewX(-12deg); }
+}
+
+.slide-three {
+    background: radial-gradient(circle at 72% 32%, rgba(100, 255, 197, 0.6), transparent 18%), linear-gradient(145deg, #25295e, #07191f 70%);
+    &::after { top: 12%; right: 5%; width: 65%; height: 45%; border-radius: 50%; background: rgba(58, 255, 194, 0.16); filter: blur(18px); transform: rotate(-12deg); }
+}
+
+.slide-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 590px;
+    h3 { margin-bottom: 1rem; font-size: clamp(2.5rem, 6vw, 5.2rem); letter-spacing: -0.05em; }
+    p:last-child { max-width: 540px; margin-bottom: 0; color: rgba(white, 0.76); font-size: 1.05rem; }
+}
+
+.slide-number { margin-bottom: 0.6rem; color: $accent; font-size: 0.76rem; font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; }
+
+.carousel-control {
+    @include button-reset;
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    display: grid;
+    width: 52px;
+    height: 52px;
+    place-items: center;
+    border-radius: 50%;
+    color: $deep;
+    background: white;
+    box-shadow: 0 8px 25px rgba($deep, 0.2);
+    transform: translateY(-50%);
+    transition: transform 180ms ease, background-color 180ms ease;
+    &:hover { background: $accent; transform: translateY(-50%) scale(1.08); }
+}
+
+.carousel-prev { left: -26px; }
+.carousel-next { right: -26px; }
+.control-chevron { width: 11px; height: 11px; border-top: 2px solid currentColor; border-right: 2px solid currentColor; transform: rotate(45deg); }
+.control-chevron-left { transform: rotate(-135deg); }
+.carousel-dots { display: flex; justify-content: center; gap: 0.65rem; margin-top: 1.7rem; }
+
+.carousel-dot {
+    @include button-reset;
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: rgba(white, 0.35);
+    transition: width 200ms ease, background-color 200ms ease;
+    &.is-active { width: 28px; background: $accent; }
+}
+
+// Requirement 10: fixed-position background image.
+.wild-callout {
+    position: relative;
+    display: flex;
+    min-height: 78vh;
+    align-items: center;
+    padding-block: var(--section-space);
+    color: white;
+    background-image: url("../assets/image.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+.wild-overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba($deep, 0.94), rgba($deep, 0.28)); }
+.story-intro { max-width: 680px; margin-bottom: 2.5rem; }
+.story-intro p:not(.eyebrow) { margin-bottom: 0; color: rgba(white, 0.8); font-size: 1.12rem; }
+
+.story-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+}
+
+.story-card {
+    @include button-reset;
+    position: relative;
+    min-height: 350px;
+    overflow: hidden;
+    border: 1px solid rgba(white, 0.22);
+    border-radius: 1.15rem;
+    background: $deep;
+    box-shadow: 0 20px 55px rgba($deep, 0.3);
+    text-align: left;
+    transition: transform 220ms ease, box-shadow 220ms ease;
+
+    &::after {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(0deg, rgba($deep, 0.9), transparent 65%);
+        content: "";
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 500ms ease;
+    }
+
+    &:hover {
+        box-shadow: 0 26px 70px rgba($deep, 0.48);
+        transform: translateY(-7px);
+
+        img { transform: scale(1.05); }
+    }
+}
+
+.story-card-copy {
+    position: absolute;
+    z-index: 1;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    color: white;
+
+    span {
+        margin-bottom: 0.3rem;
+        color: $accent;
+        font-size: 0.68rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+    }
+
+    strong {
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 1.65rem;
+        line-height: 1.1;
+    }
+}
+
+.video-layout { display: grid; grid-template-columns: 0.8fr 1.2fr; align-items: center; gap: clamp(3rem, 8vw, 7rem); }
+.video-copy p:not(.eyebrow) { color: $muted; }
+.video-caption { padding-top: 1rem; border-top: 1px solid rgba($ocean, 0.18); font-size: 0.82rem; }
+
+.video-frame {
+    position: relative;
+    padding: 0.65rem;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 22px 65px rgba($deep, 0.15);
+
+    video { display: block; width: 100%; aspect-ratio: 16 / 9; border-radius: 0.85rem; background: $deep; object-fit: cover; }
+}
+
+.video-label { position: absolute; top: 1.5rem; left: 1.5rem; padding: 0.4rem 0.7rem; border-radius: 999px; color: white; background: rgba($deep, 0.72); font-size: 0.67rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; pointer-events: none; }
+
+// Requirement 8: flexbox keeps this content vertically centered at any height.
+.join-section { text-align: center; }
+.join-content { display: flex; min-height: 280px; flex-direction: column; align-items: center; justify-content: center; }
+.join-content h2 { max-width: 850px; }
+
+.site-footer { padding-block: 4rem 2rem; color: rgba(white, 0.68); background: #041116; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto; align-items: start; gap: 3rem; }
+.footer-brand { margin-bottom: 0.8rem; color: white; }
+.footer-label { margin-bottom: 0.8rem; color: white; font-size: 0.72rem; font-weight: 800; letter-spacing: 0.13em; text-transform: uppercase; }
+.social-links { display: flex; gap: 0.65rem; }
+
+.social-links a {
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border: 1px solid rgba(white, 0.18);
+    border-radius: 50%;
+    color: white;
+    transition: color 180ms ease, background-color 180ms ease, transform 180ms ease;
+    &:hover { color: $deep; background: $accent; transform: translateY(-3px); }
+}
+
+// Requirements 15 and 16: scalable SVG masks styled entirely through CSS.
+.social-icon { display: block; width: 19px; height: 19px; background: currentColor; mask-position: center; mask-repeat: no-repeat; mask-size: contain; }
+.icon-github { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 .7a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.3c-3.3.7-4-1.4-4-1.4-.5-1.4-1.3-1.8-1.3-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .7Z'/%3E%3C/svg%3E"); }
+.icon-linkedin { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20.5 3h-17A2.5 2.5 0 0 0 1 5.5v13A2.5 2.5 0 0 0 3.5 21h17a2.5 2.5 0 0 0 2.5-2.5v-13A2.5 2.5 0 0 0 20.5 3ZM8 18H5v-8h3v8ZM6.5 8.7A1.7 1.7 0 1 1 6.5 5a1.7 1.7 0 0 1 0 3.7ZM20 18h-3v-4.3c0-2.6-3-2.4-3 0V18h-3v-8h3v1.3c1.4-2.5 6-2.7 6 2.4V18Z'/%3E%3C/svg%3E"); }
+.icon-instagram { mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm10.5 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2ZM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z'/%3E%3C/svg%3E"); }
+
+.copyright { grid-column: 1 / -1; margin: 1rem 0 0; padding-top: 1.5rem; border-top: 1px solid rgba(white, 0.12); font-size: 0.75rem; }
+
+// Requirement 11: modal and backdrop.
+.modal[hidden] { display: none; }
+.modal { position: fixed; z-index: 200; inset: 0; display: grid; padding: 1.5rem; place-items: center; }
+.modal-backdrop { position: absolute; inset: 0; background: rgba($deep, 0.82); backdrop-filter: blur(8px); animation: fade-in 220ms ease both; }
+
+.modal-panel {
+    position: relative;
+    z-index: 1;
+    width: min(620px, 100%);
+    max-height: calc(100vh - 3rem);
+    padding: 0;
+    overflow-y: auto;
+    border-radius: 1.25rem;
+    background: $snow;
+    box-shadow: 0 25px 90px rgba($deep, 0.5);
+    animation: modal-rise 300ms ease both;
+    h2 { font-size: clamp(2.2rem, 5vw, 3.7rem); }
+}
+
+.modal-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 8;
+    object-fit: cover;
+}
+
+.modal-copy { padding: clamp(2rem, 5vw, 4rem); }
+
+.modal-close {
+    @include button-reset;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: grid;
+    width: 42px;
+    height: 42px;
+    place-items: center;
+    border-radius: 50%;
+    color: $ink;
+    background: $ice;
+    font-size: 1.8rem;
+    line-height: 1;
+    transition: background-color 180ms ease, transform 180ms ease;
+    &:hover { background: rgba($accent, 0.3); transform: rotate(8deg); }
+}
+
+.modal-meta { margin: 2rem 0 0; padding-top: 1rem; border-top: 1px solid rgba($ocean, 0.15); color: $muted; font-size: 0.75rem; font-weight: 700; }
+
+// Requirement 14: scroll reveal animation.
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 600ms ease, transform 600ms ease;
+    &.is-visible { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes hero-rise {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0) rotate(45deg); }
+    50% { transform: translateY(7px) rotate(45deg); }
+}
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes modal-rise { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+// Requirement 9: layouts for the assignment's tablet and desktop sizes.
+@media (max-width: 900px) {
+    .nav-inner { width: calc(100% - 2rem); }
+    .brand { font-size: 1.25rem; }
+    .brand-mark { width: 24px; height: 24px; }
+    .nav-links { gap: 0.75rem; }
+    .nav-link { font-size: 0.72rem; }
+    .principles-grid { gap: 0.8rem; }
+    .principle-card { padding: 1.5rem; }
+    .video-layout { grid-template-columns: 1fr; }
+    .video-copy { max-width: 700px; }
+    .story-card { min-height: 300px; }
+}
+
+// Keep the side controls inside the centered content area on the two
+// narrowest required desktop/tablet viewports. This avoids horizontal scroll.
+@media (max-width: 1100px) {
+    .carousel-prev { left: 1rem; }
+    .carousel-next { right: 1rem; }
+}
+
+@media (max-width: 767px) {
+    :root { --nav-height: 72px; }
+    .site-nav { height: 72px; }
+    .brand span:last-child { display: none; }
+    .nav-links { flex: 1; justify-content: flex-end; gap: 0.65rem; }
+    .nav-link { font-size: clamp(0.54rem, 1.55vw, 0.66rem); letter-spacing: 0.01em; }
+    .hero { min-height: 840px; background-position: center, 62% center; }
+    .hero-content { padding-top: 72px; }
+    .principles-grid { grid-template-columns: 1fr; }
+    .story-grid { grid-template-columns: 1fr; }
+    .story-card { min-height: 360px; }
+    .carousel-control { top: auto; bottom: 1.1rem; transform: none; }
+    .carousel-control:hover { transform: scale(1.08); }
+    .carousel-prev { left: 1rem; }
+    .carousel-next { right: 1rem; }
+    .carousel-dots { margin-top: 1rem; }
+    .wild-callout { min-height: 680px; background-attachment: scroll; background-position: 62% center; }
+    .footer-inner { grid-template-columns: 1fr; }
+    .copyright { grid-column: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: 0.01ms !important; }
+    .reveal { opacity: 1; transform: none; }
+}
